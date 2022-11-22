@@ -8,47 +8,48 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ProtocolTest {
 
-    @BeforeEach
-    void setUp() {
-        Protocol protocol = new Protocol("client name","project name","31.12.2022",20,"28.12.2022");
-    }
-
     @Test
     void getClientName() {
-        Protocol protocol = new Protocol("client name","project name","31.12.2022",20,"28.12.2022");
-        assertEquals("client name", protocol.getClientName());
+        Client client = new Client("client name","project name","31.12.2022");
+        Protocol protocol = new Protocol(client,20,"28.12.2022");
+        assertEquals("client name", protocol.getClient().getClientName());
     }
 
     @Test
     void setProject() {
-        Protocol protocol = new Protocol("client name","project name","31.12.2022",20,"28.12.2022");
+        Client client = new Client("client name","project name","31.12.2022");
+        Protocol protocol = new Protocol(client,20,"28.12.2022");
 
-        protocol.setProject("NEW projectName");
-        assertEquals("NEW projectName",protocol.getProject());
+        protocol.getClient().setProjectName("NEW projectName");
+        assertEquals("NEW projectName",protocol.getClient().getProjectName());
     }
 
     @Test
     void getDeadLine() {
-        Protocol protocol = new Protocol("client name","project name","31.12.2022",20,"28.12.2022");
-        assertEquals("31.12.2022",protocol.getDeadLine());
+        Client client = new Client("client name","project name","31.12.2022");
+        Protocol protocol = new Protocol(client,20,"28.12.2022");
+        assertEquals("31.12.2022",protocol.getClient().getExpirationDate());
     }
 
     @Test
     void getMinutes() {
-        Protocol protocol = new Protocol("client name","project name","31.12.2022",20,"28.12.2022");
+        Client client = new Client("client name","project name","31.12.2022");
+        Protocol protocol = new Protocol(client,20,"28.12.2022");
         assertEquals(20,protocol.getMinutes());
     }
 
     @Test
     void setMinutes() {
-        Protocol protocol = new Protocol("client name","project name","31.12.2022",20,"28.12.2022");
+        Client client = new Client("client name","project name","31.12.2022");
+        Protocol protocol = new Protocol(client,20,"28.12.2022");
         protocol.setMinutes(1);
         assertEquals(1,protocol.getMinutes());
     }
 
     @Test
     void getProtocolDate() {
-        Protocol protocol = new Protocol("client name","project name","31.12.2022",20,"28.12.2022");
+        Client client = new Client("client name","project name","31.12.2022");
+        Protocol protocol = new Protocol(client,20,"28.12.2022");
         assertEquals("28.12.2022",protocol.getProtocolDate());
     }
 }

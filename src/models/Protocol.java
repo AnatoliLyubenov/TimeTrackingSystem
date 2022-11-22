@@ -3,32 +3,23 @@ package models;
 import java.io.Serializable;
 
 public class Protocol implements Serializable {
-    private String clientName, project, deadLine, protocolDate;
+    private Client client;
+    private String protocolDate; //clientName, project, deadLine,
     private int minutes;
 
 
-    public Protocol(String clientName, String project, String deadLine, int minutes, String protocolDate) {
-        this.clientName = clientName;
-        this.project = project;
-        this.deadLine = deadLine;
+    public Protocol(Client client, int minutes, String protocolDate) {
+        this.client = client;
         this.protocolDate = protocolDate;
         this.minutes = minutes;
     }
 
-    public String getClientName() {
-        return clientName;
+    public Client getClient() {
+        return client;
     }
 
-    public String getProject() {
-        return project;
-    }
-
-    public void setProject(String project) {
-        this.project = project;
-    }
-
-    public String getDeadLine() {
-        return deadLine;
+    public void setClient(Client client) {
+        this.client = client;
     }
 
     public int getMinutes() {

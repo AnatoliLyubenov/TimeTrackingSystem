@@ -93,7 +93,7 @@ public class Statistics {
                             ArrayList<Protocol> employeeDailyProtocols = (accountsList.get(accountName).getDailyProtocols().get(protocolDate));//getting Protocol's List of for the specific date
                             for (Protocol employeeDailyProtocol : employeeDailyProtocols) {
                                 //copying every Protocol's field to weekProtocols List
-                                weekProtocols.add(new WeeklyReportDTO(accountName, employeeDailyProtocol.getClientName(), employeeDailyProtocol.getProject(), employeeDailyProtocol.getDeadLine(), employeeDailyProtocol.getMinutes(), employeeDailyProtocol.getProtocolDate()));
+                                weekProtocols.add(new WeeklyReportDTO(accountName, employeeDailyProtocol.getClient().getClientName(), employeeDailyProtocol.getClient().getProjectName(), employeeDailyProtocol.getClient().getExpirationDate(), employeeDailyProtocol.getMinutes(), employeeDailyProtocol.getProtocolDate()));
                             }
                         }
                     } catch (ParseException e) {
