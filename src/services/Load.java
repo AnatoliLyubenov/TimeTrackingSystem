@@ -1,11 +1,13 @@
 package services;
 
+import models.Account;
 import models.Client;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Load {
     public static ArrayList<Client> clientListFromFile() {
@@ -25,4 +27,20 @@ public class Load {
         return clientsList;
     }
 
+    public static HashMap<String , Account> accountsListFromFile() {
+        HashMap<String , Account> accountsList;
+        if (Validators.ifFileIsEmpty("ProgramFiles/AccountsList.txt")){
+            accountsList = new HashMap<String, Account>();
+        }else {
+            try {
+                FileInputStream fi = new FileInputStream("ProgramFiles/AccountsList.txt");
+                ObjectInputStream reader = new ObjectInputStream(fi);
+                accountsList = (HashMap<String, Account>) reader.readObject();
+                reader.close();
+            } catch (IOException | ClassNotFoundException e) {
+                throw new RuntimeException("Class Not Found!");
+            }
+        }
+        return accountsList;
+    }
 }

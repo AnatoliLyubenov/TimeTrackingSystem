@@ -1,6 +1,26 @@
 package menus;
 
 
-public class Login {
+import java.util.Scanner;
 
+public class Login {
+    public static String getUserChoiceAdmin(){
+        System.out.println("Admin Account NOT created.");
+        System.out.println("1. Create Admin Account.");
+        System.out.println("0. EXIT.");
+        System.out.print("Your choice - > ");
+        Scanner sc = new Scanner(System.in);
+        return sc.next();
+    }
+    public static String getUserChoice(){
+        System.out.println("  ===== A & A =====   ");
+        System.out.println("    = Solutions =    ");
+        System.out.println("   == Login Menu ==    ");
+        System.out.println();
+        System.out.println("1. Login.");
+        System.out.println("0. EXIT.");
+        System.out.print("Your choice - > ");
+        Scanner sc = new Scanner(System.in);
+        return sc.next();
+    }
 }
