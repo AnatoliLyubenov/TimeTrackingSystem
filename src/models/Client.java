@@ -62,7 +62,7 @@ public class Client implements Serializable {
         }
         ArrayList<Client> clientsList = Load.clientListFromFile();
         System.out.println("AvailableClients List:");
-        System.out.println("================================================================");
+
         for (int i = 0; i < clientsList.size(); i++) {
             System.out.println("ID - > " + (i + 1));
             System.out.println("Client Name - > " + clientsList.get(i).getClientName());
