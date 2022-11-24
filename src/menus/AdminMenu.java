@@ -1,12 +1,14 @@
 package menus;
 
+import models.Client;
 import services.*;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 import static menus.StatisticsMenu.statisticsMenu;
 import static services.ValidateChoice.validateChoice;
-import static services.ValidateClientFieldsAreNotEmpty.validateEnterClientFieldsAreNotEmpty;
 import static services.ValidateDate.validateExpirationDate;
 import static services.ValidateRepeatingClientProject.checkRepeatingClientProject;
 
@@ -104,6 +106,33 @@ public class AdminMenu {
             PressEnter.promptEnterKey();
         }
         AdminMenu.menu();
+    }
+
+    /*public static ArrayList<Client> getClientList() {
+        ArrayList<Client> clientsList;
+        if (!ifFileIsEmpty("ProgramFiles/ClientsList.txt")) {  //if Clients.txt List is NOT Empty
+            clientsList = Load.clientListFromFile(); //load the List
+        } else {
+            clientsList = new ArrayList<>();
+        }
+        return clientsList;
+    }*/
+
+    public static boolean validateEnterClientFieldsAreNotEmpty(String clientName,String projectName,String expirationDate) {
+        boolean isNotEmpty = true;
+        HashMap<String, String> fields = new HashMap<String, String>();
+        fields.put(clientName, "\"Client's Name\"");
+        fields.put(projectName, "\"Project's Name\"");
+        fields.put(expirationDate, "\"Expiration date\"");
+
+        for (String field : fields.keySet()) {
+            if (field.equals("")) {
+                System.out.println("Empty fields are NOT acceptable!!!");
+                System.out.println(fields.get(field) + " field can NOT be empty!");
+                isNotEmpty = false;
+            }
+        }
+        return isNotEmpty;
     }
 
     public static void menu() {
