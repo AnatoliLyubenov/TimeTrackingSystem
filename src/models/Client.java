@@ -3,12 +3,12 @@ package models;
 import menus.Login;
 import services.Load;
 import services.PressEnter;
-import services.Save;
-import services.Validators;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import static services.ValidateChoice.validateChoice;
 
 public class Client implements Serializable {
     private String clientName;
@@ -40,7 +40,7 @@ public class Client implements Serializable {
         System.out.print("Choose ID number of a Client - > ");
         Scanner sc = new Scanner(System.in);
         ArrayList<Client> clientsList = Load.clientListFromFile();
-        int choice = Validators.validateChoice(sc.nextLine(), clientsList.size());
+        int choice = validateChoice(sc.nextLine(), clientsList.size());
         if (choice == -1) {
             getChosenClientIndex();
         }
