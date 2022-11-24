@@ -36,7 +36,7 @@ public class Client implements Serializable {
     }
 
     public static int getChosenClientIndex() {
-
+        showClients();
         System.out.print("Choose ID number of a Client - > ");
         Scanner sc = new Scanner(System.in);
         ArrayList<Client> clientsList = Load.clientListFromFile();
@@ -46,6 +46,30 @@ public class Client implements Serializable {
         }
         return choice - 1;
 
+    }
+    private static void showClients() {
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("ProgramFiles/ClientsList.txt"));
+            if (br.readLine() == null) {
+                System.out.println("List of Clients.txt is empty.");
+                System.out.println("Register Clients.txt first.");
+                PressEnter.promptEnterKey();
+                Login.loginMenu();
+            }
+        } catch (IOException e) {
+            System.out.println("File not found! " + e.getMessage());
+            Login.loginMenu();
+        }
+        ArrayList<Client> clientsList = Load.clientListFromFile();
+        System.out.println("AvailableClients List:");
+        System.out.println("================================================================");
+        for (int i = 0; i < clientsList.size(); i++) {
+            System.out.println("ID - > " + (i + 1));
+            System.out.println("Client Name - > " + clientsList.get(i).getClientName());
+            System.out.println("Project Name - > " + clientsList.get(i).getProjectName());
+            System.out.println("Expiration Date - > " + clientsList.get(i).getExpirationDate());
+            System.out.println("================================================================");
+        }
     }
 }
 
