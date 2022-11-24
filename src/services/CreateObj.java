@@ -3,6 +3,7 @@ package services;
 import models.Account;
 import models.Admin;
 import models.Client;
+import models.Employee;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,6 +16,13 @@ import java.util.HashMap;
             Save.accountsListToFile(accountsList, filePath);
             return 1;
 
+        }
+        public static int employeeObj(String accountName, String accountPassword, String name,String filePath) {
+            HashMap<String, Account> accountsList = Load.accountsListFromFile();
+            accountsList.put(accountName, new Employee(accountName, accountPassword, name, false));
+            Save.accountsListToFile(accountsList,filePath);
+            System.out.println("Employee Account "+accountName+" successfully created.");
+            return 1;
         }
 
         public static int clientObj(String clientName, String projectName, String date,String filePath) {
