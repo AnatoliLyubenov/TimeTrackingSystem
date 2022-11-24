@@ -2,7 +2,9 @@ package services;
 
 import models.Account;
 import models.Admin;
+import models.Client;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 
@@ -14,7 +16,14 @@ import java.util.HashMap;
             return 1;
 
         }
-    }
+
+        public static int clientObj(String clientName, String projectName, String date,String filePath) {
+            ArrayList<Client> clientsList = Load.clientListFromFile();
+            clientsList.add(new Client(clientName, projectName, date));
+            Save.clientListToFile(clientsList, filePath);// "ProgramFiles/ClientsList.txt"
+            return 1;
+        }
+}
 
 
 
