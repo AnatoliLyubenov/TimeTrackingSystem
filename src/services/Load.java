@@ -9,10 +9,12 @@ import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static services.ValidateIfFileIsEmpty.ifFileIsEmpty;
+
 public class Load {
     public static ArrayList<Client> clientListFromFile() {
         ArrayList<Client> clientsList;
-        if (Validators.ifFileIsEmpty("ProgramFiles/ClientsList.txt")){
+        if (ifFileIsEmpty("ProgramFiles/ClientsList.txt")){
             clientsList = new ArrayList<Client>();
         }else {
             try {
@@ -29,7 +31,7 @@ public class Load {
 
     public static HashMap<String , Account> accountsListFromFile() {
         HashMap<String , Account> accountsList;
-        if (Validators.ifFileIsEmpty("ProgramFiles/AccountsList.txt")){
+        if (ifFileIsEmpty("ProgramFiles/AccountsList.txt")){
             accountsList = new HashMap<String, Account>();
         }else {
             try {
