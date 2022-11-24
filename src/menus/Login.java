@@ -6,11 +6,6 @@ import java.util.Scanner;
 
 
 public class Login {
-
-
-
-
-
     public static String getUserChoice(){
         System.out.println("  ===== A & A =====   ");
         System.out.println("    = Solutions =    ");
