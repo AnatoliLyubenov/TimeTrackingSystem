@@ -4,10 +4,17 @@ package services;
 import models.Account;
 
 import java.util.HashMap;
+import java.util.Scanner;
 
 import static services.PrintOut.showEmployeesList;
 
 public class Statistics {
+    public static String getEmployeeName(){
+        System.out.println("Choose Employee Account Name to show Employee's Statistics");
+        System.out.print("Enter Employee Account Name - > ");
+        Scanner sc = new Scanner(System.in);
+        return sc.nextLine().toUpperCase();
+    }
 
     public static void searchByEmployeeName() {
         HashMap<String, Account> accountsList = Load.accountsListFromFile();
