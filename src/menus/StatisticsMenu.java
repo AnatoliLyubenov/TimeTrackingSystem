@@ -1,16 +1,12 @@
 package menus;
 
-import services.CalculateWorkTimeH;
-import services.PressEnter;
-import wrapperDTO.WeeklyReportDTO;
 
-import java.util.ArrayList;
+
 import java.util.Scanner;
 
 import static menus.AdminMenu.menu;
-import static services.Statistics.requestWeekNumber;
 import static services.Statistics.searchByEmployeeName;
-
+import static services.Statistics.showSpecificWeekStatistics;
 import static services.ValidateChoice.validateChoice;
 
 public class StatisticsMenu {
@@ -39,28 +35,4 @@ public class StatisticsMenu {
     public static void statisticsMenu() {
         chooseStatisticsMenuOption();
     }
-    public static void showSpecificWeekStatistics() {
-        int weekNumber=requestWeekNumber();
-        int totalWeekWorkTime=0;
-        ArrayList<WeeklyReportDTO> weekProtocols=collectProtocolsFromSpecificWeek(getMondayDate(weekNumber),getSundayDate(weekNumber));
-        System.out.println();
-        System.out.println("<<<< WEEK "+weekNumber+" STATISTICS >>>>");
-        System.out.println("----------------------------------------------------------------");
-        for (int i = 0; i < weekProtocols.size(); i++) {
-            System.out.println("Employee Account Name - > " + weekProtocols.get(i).getAccountName());
-            System.out.println("Client Name - > " + weekProtocols.get(i).getClientName());
-            System.out.println("Project Name - > " + weekProtocols.get(i).getProject());
-            System.out.println("Expiration Date - > " + weekProtocols.get(i).getDeadLine());
-            System.out.println("Protocol Date - > "+weekProtocols.get(i).getProtocolDate());
-            System.out.println("Work time spend during week number " + weekNumber + " - > " + CalculateWorkTimeH.convertMtoH(weekProtocols.get(i).getMinutes()));
-            System.out.println("================================================================");
-            totalWeekWorkTime += weekProtocols.get(i).getMinutes();
-        }
-        System.out.println("*******************************************************************************");
-        System.out.println("Week Number " + weekNumber+" - total work time spend on Clients.txt - > " + CalculateWorkTimeH.convertMtoH(totalWeekWorkTime));
-        System.out.println("*******************************************************************************");
-        System.out.println();
-        PressEnter.promptEnterKey();
-    }
-
 }
