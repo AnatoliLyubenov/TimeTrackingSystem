@@ -15,13 +15,13 @@ abstract public class Account implements Serializable {
     public Account() {
     }
 
-
-    public Account(String userName, String password,String name, boolean isAdmin) {
+    public Account(String userName, String password, String name, boolean isAdmin) {
         this.userName = userName;
         this.password = password;
         this.name = name;
         this.isAdmin = isAdmin;
     }
+
     public Account(String userName, String password, boolean isAdmin) {
         this.userName = userName;
         this.password = password;

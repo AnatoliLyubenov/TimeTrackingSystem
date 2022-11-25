@@ -1,7 +1,5 @@
 package menus;
 
-
-
 import java.util.Scanner;
 
 import static menus.AdminMenu.menu;

@@ -19,6 +19,7 @@ public class PrintOut {
             }
         }
     }
+
     public static void showEmployeeClients(String accountName) {
         HashMap<String, Account> accountsList = Load.accountsListFromFile();
         HashMap<String, ArrayList<Protocol>> employeeProtocols = accountsList.get(accountName).getDailyProtocols();
@@ -41,5 +42,4 @@ public class PrintOut {
             totalDailyWorkTime = 0;//reset work time for the next date
         }
     }
-
 }
