@@ -8,8 +8,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import static menus.AdminMenu.menu;
+import static services.Statistics.requestWeekNumber;
 import static services.Statistics.searchByEmployeeName;
-import static services.Statistics.showSpecificWeekStatistics;
+
 import static services.ValidateChoice.validateChoice;
 
 public class StatisticsMenu {

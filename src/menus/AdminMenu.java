@@ -105,7 +105,6 @@ public class AdminMenu {
         AdminMenu.menu();
     }
 
-
     public static void menu() {
         chooseAdminMenuOption();
     }
