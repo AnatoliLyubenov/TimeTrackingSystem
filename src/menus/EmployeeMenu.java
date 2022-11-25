@@ -151,6 +151,4 @@ public class EmployeeMenu {
             System.out.println("Record successfully added to the Daily Protocol.");
         }
     }
-
-
 }
