@@ -13,5 +13,4 @@ public class ValidateRepeatingEmployee {
         }
         return isRepeating;
     }
-
 }

@@ -17,7 +17,6 @@ public class ValidateDate {
         return isNotEmpty;
     }
 
-
     public static String validateExpirationDate(String inputDate) {
         String result = "not valid";          // inputDate is NOT valid
         DateFormat df = new SimpleDateFormat("dd.MM.yyyy");

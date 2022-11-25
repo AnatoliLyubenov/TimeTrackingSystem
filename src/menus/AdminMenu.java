@@ -96,7 +96,6 @@ public class AdminMenu {
 
             if (CreateObj.employeeObj(accountName.toUpperCase(), accountPassword, name, "ProgramFiles/AccountsList.txt") == 1) {
                 System.out.println();
-
             }
         } else {
             System.out.println("Specified Employee Account Name already Exists.\nUse another one.");

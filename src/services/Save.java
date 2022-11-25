@@ -18,7 +18,6 @@ public class Save {
             objectOut.close();
         } catch (Exception exception) {
             throw new RuntimeException(exception);
-            // exception.printStackTrace();
         }
     }
     public static void clientListToFile(ArrayList<Client> clientsList, String filePath) {
