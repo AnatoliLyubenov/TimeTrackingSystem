@@ -1,19 +1,17 @@
 package menus;
 
-import models.Client;
 import services.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Scanner;
 
 import static menus.StatisticsMenu.statisticsMenu;
 import static services.ValidateChoice.validateChoice;
+import static services.ValidateClientFieldsAreNotEmpty.validateEnterClientFieldsAreNotEmpty;
 import static services.ValidateDate.validateExpirationDate;
 import static services.ValidateRepeatingClientProject.checkRepeatingClientProject;
 
 public class AdminMenu {
-    public static String getUserChoice(){
+    public static String getUserChoice() {
         System.out.println("  ===== A & A =====   ");
         System.out.println("   == Solutions ==    ");
         System.out.println("    = Admin Menu=     ");
@@ -26,11 +24,11 @@ public class AdminMenu {
         Scanner sc = new Scanner(System.in);
         return sc.next();
     }
+
     private static void chooseAdminMenuOption() {
         int choice = validateChoice(getUserChoice(), 4);
         if (choice == -1) {//choice value OUT of range
             chooseAdminMenuOption();
-            //returnMenu(3, 2);
         } else {
             switch (choice) {
                 case 0 -> {
@@ -40,7 +38,6 @@ public class AdminMenu {
                 case 1 -> {
                     System.out.println();
                     enterClient();
-                    //createClient();
                 }
                 case 2 -> {
                     System.out.println();
@@ -68,13 +65,13 @@ public class AdminMenu {
         String projectName = sc.nextLine();
         System.out.print("Expiration date - > ");
         String expirationDate = sc.nextLine();
-        if (validateEnterClientFieldsAreNotEmpty(clientName,projectName,expirationDate)){
+        if (validateEnterClientFieldsAreNotEmpty(clientName, projectName, expirationDate)) {
             if (!validateExpirationDate(expirationDate).equals("not valid")) { // if the expiration date is VALID
                 if (checkRepeatingClientProject(clientName, projectName)) { //if Project already exists
                     projectExistsMessage(clientName);
                     PressEnter.promptEnterKey();
                 } else {
-                    if (CreateObj.clientObj(clientName, projectName, expirationDate,"ProgramFiles/ClientsList.txt")==1){
+                    if (CreateObj.clientObj(clientName, projectName, expirationDate, "ProgramFiles/ClientsList.txt") == 1) {
                         System.out.println("Client successfully created.");
                     }
                 }
@@ -83,7 +80,7 @@ public class AdminMenu {
             }
             System.out.println();
             AdminMenu.menu();
-        }else enterClient();
+        } else enterClient();
 
     }
 
@@ -97,7 +94,7 @@ public class AdminMenu {
             System.out.print("Enter Employee Names- > ");
             String name = sc.nextLine();
 
-            if (CreateObj.employeeObj(accountName.toUpperCase(), accountPassword, name,"ProgramFiles/AccountsList.txt") == 1) {
+            if (CreateObj.employeeObj(accountName.toUpperCase(), accountPassword, name, "ProgramFiles/AccountsList.txt") == 1) {
                 System.out.println();
 
             }
@@ -108,32 +105,6 @@ public class AdminMenu {
         AdminMenu.menu();
     }
 
-    /*public static ArrayList<Client> getClientList() {
-        ArrayList<Client> clientsList;
-        if (!ifFileIsEmpty("ProgramFiles/ClientsList.txt")) {  //if Clients.txt List is NOT Empty
-            clientsList = Load.clientListFromFile(); //load the List
-        } else {
-            clientsList = new ArrayList<>();
-        }
-        return clientsList;
-    }*/
-
-    public static boolean validateEnterClientFieldsAreNotEmpty(String clientName,String projectName,String expirationDate) {
-        boolean isNotEmpty = true;
-        HashMap<String, String> fields = new HashMap<String, String>();
-        fields.put(clientName, "\"Client's Name\"");
-        fields.put(projectName, "\"Project's Name\"");
-        fields.put(expirationDate, "\"Expiration date\"");
-
-        for (String field : fields.keySet()) {
-            if (field.equals("")) {
-                System.out.println("Empty fields are NOT acceptable!!!");
-                System.out.println(fields.get(field) + " field can NOT be empty!");
-                isNotEmpty = false;
-            }
-        }
-        return isNotEmpty;
-    }
 
     public static void menu() {
         chooseAdminMenuOption();
