@@ -2,6 +2,7 @@ package menus;
 
 import services.*;
 
+import java.util.HashMap;
 import java.util.Scanner;
 
 import static menus.StatisticsMenu.statisticsMenu;
@@ -103,6 +104,7 @@ public class AdminMenu {
         }
         AdminMenu.menu();
     }
+
 
     public static void menu() {
         chooseAdminMenuOption();
