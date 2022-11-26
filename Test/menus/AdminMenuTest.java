@@ -1,14 +1,11 @@
 package menus;
 
-import models.Client;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static services.ValidateClientFieldsAreNotEmpty.validateEnterClientFieldsAreNotEmpty;
-
 
 class AdminMenuTest {
 
@@ -19,14 +16,5 @@ class AdminMenuTest {
         System.setIn(in);
 
         assertEquals("5", AdminMenu.getUserChoice());
-    }
-    @Test
-    void validateEnterClientFieldsAreNotEmptyFalse(){
-        assertFalse(validateEnterClientFieldsAreNotEmpty("","Test","abc"));
-    }
-
-    @Test
-    void validateEnterClientFieldsAreNotEmptyTrue(){
-        assertTrue(validateEnterClientFieldsAreNotEmpty("aaa","Test","abc"));
     }
 }
