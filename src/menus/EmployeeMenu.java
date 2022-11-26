@@ -3,16 +3,12 @@ package menus;
 import models.Account;
 import models.Client;
 import models.Protocol;
-import services.CalculateWorkTimeH;
-import services.Load;
-import services.PressEnter;
-import services.Save;
+import services.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import static models.Client.getChosenClientIndex;
@@ -36,27 +32,22 @@ public class EmployeeMenu {
     }
     public static void chooseEmployeeMenuOption(String name) {
         String accountName=name.toUpperCase();
-        String choice = getUserChoice(accountName);
-        try {
-            if (Integer.parseInt(choice) < 0 || Integer.parseInt(choice) > 2) {
-                System.out.println("Choice range can be from 0 to 2 including!");
-                chooseEmployeeMenuOption(accountName);
-            }
-        } catch (NumberFormatException | InputMismatchException e) {
-            System.out.println("Invalid choice! Enter digit from 0 to 2 including!");
-            chooseEmployeeMenuOption(accountName);
-        }
 
-        switch (Integer.parseInt(choice)) {
-            case 0 -> {
-                System.out.println();
-                Login.loginMenu();
+        int choice= ValidateChoice.validateChoice(getUserChoice(accountName),2);
+        if (choice==-1){
+            chooseEmployeeMenuOption(accountName);
+        }else {
+            switch (choice) {
+                case 0 -> {
+                    System.out.println();
+                    Login.loginMenu();
+                }
+                case 1 -> {
+                    writeToDailyProtocol(accountName);
+                    chooseEmployeeMenuOption(accountName);
+                }
+                case 2 -> showEmployeeDailyProtocols(accountName);
             }
-            case 1 -> {
-                writeToDailyProtocol(accountName);
-                chooseEmployeeMenuOption(accountName);
-            }
-            case 2 -> showEmployeeDailyProtocols(accountName);
         }
     }
 
