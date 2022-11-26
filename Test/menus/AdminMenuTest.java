@@ -17,5 +17,4 @@ class AdminMenuTest {
 
         assertEquals("5", AdminMenu.getUserChoice());
     }
-
 }
