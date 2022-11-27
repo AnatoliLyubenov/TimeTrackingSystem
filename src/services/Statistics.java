@@ -13,12 +13,13 @@ import static services.PrintOut.showEmployeeClients;
 import static services.PrintOut.showEmployeesList;
 
 public class Statistics {
-    public static String getEmployeeName(){
+    public static String getEmployeeName() {
         System.out.println("Choose Employee Account Name to show Employee's Statistics");
         System.out.print("Enter Employee Account Name - > ");
         Scanner sc = new Scanner(System.in);
         return sc.nextLine().toUpperCase();
     }
+
     public static void searchByEmployeeName() {
         HashMap<String, Account> accountsList = Load.accountsListFromFile();
         showEmployeesList(accountsList);
@@ -55,24 +56,24 @@ public class Statistics {
     }
 
     public static void showSpecificWeekStatistics() {
-        int weekNumber=requestWeekNumber();
-        int totalWeekWorkTime=0;
-        ArrayList<WeeklyReportDTO> weekProtocols=collectProtocolsFromSpecificWeek(getMondayDate(weekNumber),getSundayDate(weekNumber));
+        int weekNumber = requestWeekNumber();
+        int totalWeekWorkTime = 0;
+        ArrayList<WeeklyReportDTO> weekProtocols = collectProtocolsFromSpecificWeek(getMondayDate(weekNumber), getSundayDate(weekNumber));
         System.out.println();
-        System.out.println("<<<< WEEK "+weekNumber+" STATISTICS >>>>");
+        System.out.println("<<<< WEEK " + weekNumber + " STATISTICS >>>>");
         System.out.println("----------------------------------------------------------------");
         for (int i = 0; i < weekProtocols.size(); i++) {
             System.out.println("Employee Account Name - > " + weekProtocols.get(i).getAccountName());
             System.out.println("Client Name - > " + weekProtocols.get(i).getClientName());
             System.out.println("Project Name - > " + weekProtocols.get(i).getProject());
             System.out.println("Expiration Date - > " + weekProtocols.get(i).getDeadLine());
-            System.out.println("Protocol Date - > "+weekProtocols.get(i).getProtocolDate());
+            System.out.println("Protocol Date - > " + weekProtocols.get(i).getProtocolDate());
             System.out.println("Work time spend during week number " + weekNumber + " - > " + CalculateWorkTimeH.convertMtoH(weekProtocols.get(i).getMinutes()));
             System.out.println("================================================================");
             totalWeekWorkTime += weekProtocols.get(i).getMinutes();
         }
         System.out.println("*******************************************************************************");
-        System.out.println("Week Number " + weekNumber+" - total work time spend on Clients.txt - > " + CalculateWorkTimeH.convertMtoH(totalWeekWorkTime));
+        System.out.println("Week Number " + weekNumber + " - total work time spend on Clients.txt - > " + CalculateWorkTimeH.convertMtoH(totalWeekWorkTime));
         System.out.println("*******************************************************************************");
         System.out.println();
         PressEnter.promptEnterKey();
@@ -83,7 +84,7 @@ public class Statistics {
         HashMap<String, Account> accountsList = Load.accountsListFromFile();
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
         for (String accountName : accountsList.keySet()) {
-            if (!accountsList.get(accountName).isAdmin()){//excluding admin account, who doesn't have dailyProtocols' field
+            if (!accountsList.get(accountName).isAdmin()) {//excluding admin account, who doesn't have dailyProtocols' field
                 for (String protocolDate : accountsList.get(accountName).getDailyProtocols().keySet()) {
                     try {//checking every account if protocolDate is between monday and sunday of the specific weekNumber
                         Date date = sdf.parse(protocolDate); //parse the protocolDate to Date object
@@ -91,7 +92,7 @@ public class Statistics {
                             ArrayList<Protocol> employeeDailyProtocols = (accountsList.get(accountName).getDailyProtocols().get(protocolDate));//getting Protocol's List of for the specific date
                             for (Protocol employeeDailyProtocol : employeeDailyProtocols) {
                                 //copying every Protocol's field to weekProtocols List
-                                weekProtocols.add(new WeeklyReportDTO(accountName,employeeDailyProtocol.getClientName(), employeeDailyProtocol.getProject(), employeeDailyProtocol.getDeadLine(), employeeDailyProtocol.getMinutes(), employeeDailyProtocol.getProtocolDate()));
+                                weekProtocols.add(new WeeklyReportDTO(accountName, employeeDailyProtocol.getClientName(), employeeDailyProtocol.getProject(), employeeDailyProtocol.getDeadLine(), employeeDailyProtocol.getMinutes(), employeeDailyProtocol.getProtocolDate()));
                             }
                         }
                     } catch (ParseException e) {
@@ -106,15 +107,15 @@ public class Statistics {
     public static int requestWeekNumber() {
         System.out.print("Enter desired Week Number - > ");
         Scanner sc = new Scanner(System.in);
-        int weekNumber=sc.nextInt();
+        int weekNumber = sc.nextInt();
 
         Calendar calendar = Calendar.getInstance();
-        int weekCount=calendar.getActualMaximum(Calendar.WEEK_OF_YEAR);
+        int weekCount = calendar.getActualMaximum(Calendar.WEEK_OF_YEAR);
 
-        if (weekNumber<0||weekNumber>weekCount){
+        if (weekNumber < 0 || weekNumber > weekCount) {
             System.out.println("Invalid choice!!!\nEnter digit from 1 to " + weekCount + " including!");
             PressEnter.promptEnterKey();
-            weekNumber=requestWeekNumber();
+            weekNumber = requestWeekNumber();
         }
         return weekNumber;
     }

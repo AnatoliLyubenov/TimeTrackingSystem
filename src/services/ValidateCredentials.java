@@ -35,12 +35,13 @@ public class ValidateCredentials {
         return result;
     }
 
-    public static String getEnteredAccountName(){
+    public static String getEnteredAccountName() {
         System.out.print("Enter Account Name - > ");
         Scanner sc = new Scanner(System.in);
         return sc.nextLine();
     }
-    public static String getEnteredAccountPassword(){
+
+    public static String getEnteredAccountPassword() {
         System.out.print("Enter password - > ");
         Scanner sc = new Scanner(System.in);
         return sc.nextLine();

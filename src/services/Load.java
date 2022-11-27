@@ -14,9 +14,9 @@ import static services.ValidateIfFileIsEmpty.ifFileIsEmpty;
 public class Load {
     public static ArrayList<Client> clientListFromFile() {
         ArrayList<Client> clientsList;
-        if (ifFileIsEmpty("ProgramFiles/ClientsList.txt")){
+        if (ifFileIsEmpty("ProgramFiles/ClientsList.txt")) {
             clientsList = new ArrayList<Client>();
-        }else {
+        } else {
             try {
                 ObjectInputStream reader = new ObjectInputStream(new FileInputStream("ProgramFiles/ClientsList.txt"));
                 clientsList = (ArrayList<Client>) reader.readObject();
@@ -29,11 +29,11 @@ public class Load {
         return clientsList;
     }
 
-    public static HashMap<String , Account> accountsListFromFile() {
-        HashMap<String , Account> accountsList;
-        if (ifFileIsEmpty("ProgramFiles/AccountsList.txt")){
+    public static HashMap<String, Account> accountsListFromFile() {
+        HashMap<String, Account> accountsList;
+        if (ifFileIsEmpty("ProgramFiles/AccountsList.txt")) {
             accountsList = new HashMap<String, Account>();
-        }else {
+        } else {
             try {
                 FileInputStream fi = new FileInputStream("ProgramFiles/AccountsList.txt");
                 ObjectInputStream reader = new ObjectInputStream(fi);

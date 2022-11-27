@@ -16,7 +16,7 @@ import static services.ValidateProtocol.checkIfDailyProtocolExists;
 import static services.ValidateProtocol.checkIfProjectRecordExists;
 
 public class EmployeeMenu {
-    public static String getUserChoice(String accountName){
+    public static String getUserChoice(String accountName) {
         System.out.println();
         System.out.println("  ===== A & A =====   ");
         System.out.println("    = Solutions =    ");
@@ -30,13 +30,14 @@ public class EmployeeMenu {
         Scanner sc = new Scanner(System.in);
         return sc.next();
     }
-    public static void chooseEmployeeMenuOption(String name) {
-        String accountName=name.toUpperCase();
 
-        int choice= ValidateChoice.validateChoice(getUserChoice(accountName),2);
-        if (choice==-1){
+    public static void chooseEmployeeMenuOption(String name) {
+        String accountName = name.toUpperCase();
+
+        int choice = ValidateChoice.validateChoice(getUserChoice(accountName), 2);
+        if (choice == -1) {
             chooseEmployeeMenuOption(accountName);
-        }else {
+        } else {
             switch (choice) {
                 case 0 -> {
                     System.out.println();
@@ -126,7 +127,7 @@ public class EmployeeMenu {
                 System.out.println("Record successfully added to the New Daily Protocol.");
             }
         }
-        Save.accountsListToFile(accountsList,"ProgramFiles/AccountsList.txt");
+        Save.accountsListToFile(accountsList, "ProgramFiles/AccountsList.txt");
         PressEnter.promptEnterKey();
     }
 
