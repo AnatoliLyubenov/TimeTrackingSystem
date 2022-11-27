@@ -20,4 +20,20 @@ public class CreateObjTest {
         assertThrows(RuntimeException.class,()->CreateObj.adminObj(accountName,password,"//"));
     }
 
+    @Test
+    void employeeObjCreated() {
+        String accountName = "accountName";
+        String password = "password";
+        String name = "Anton";
+        assertEquals(1,CreateObj.employeeObj(accountName,password,name,"AccountsList.txt"));
+    }
+    @Test
+    void employeeObjNotCreated() {
+        String accountName = "accountName";
+        String password = "password";
+        String name = "Anton";
+        assertThrows(RuntimeException.class,()->CreateObj.employeeObj(accountName,password,name,"//"));
+    }
+
+
 }
