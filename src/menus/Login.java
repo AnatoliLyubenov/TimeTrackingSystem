@@ -10,7 +10,7 @@ import static services.ValidateCredentials.*;
 import static services.ValidateIfFileIsEmpty.ifFileIsEmpty;
 
 public class Login {
-    public static String getUserChoiceAdmin(){
+    public static String getUserChoiceAdmin() {
         System.out.println("Admin Account NOT created.");
         System.out.println("1. Create Admin Account.");
         System.out.println("0. EXIT.");
@@ -24,7 +24,7 @@ public class Login {
         if (choice == -1) {
             chooseMenuOptionInitialLogin();
         } else if (choice == 1) {
-            if (CreateObj.adminObj(getAdminAccountName(), getAdminAccountPassword(),"ProgramFiles/AccountsList.txt")==1){
+            if (CreateObj.adminObj(getAdminAccountName(), getAdminAccountPassword(), "ProgramFiles/AccountsList.txt") == 1) {
                 System.out.println("Admin Account created successfully.\n");
             }
             AdminMenu.menu();
@@ -36,6 +36,7 @@ public class Login {
         System.out.print("Enter the Admin Account Name - > ");
         return sc.next().toUpperCase();
     }
+
     public static String getAdminAccountPassword() {
         Scanner sc = new Scanner(System.in);
         System.out.print("Enter Password - > ");
@@ -51,7 +52,7 @@ public class Login {
         }
     }
 
-    public static String getUserChoice(){
+    public static String getUserChoice() {
         System.out.println("  ===== A & A =====   ");
         System.out.println("    = Solutions =    ");
         System.out.println("   == Login Menu ==    ");
@@ -64,7 +65,7 @@ public class Login {
     }
 
     private static void validateLoginCredentials() {
-        String accountName=getEnteredAccountName();
+        String accountName = getEnteredAccountName();
 
         if (ifAccountNameIsValid(accountName)) {
             int result = checkPassword(accountName, getEnteredAccountPassword());

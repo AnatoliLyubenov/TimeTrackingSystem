@@ -20,6 +20,7 @@ public class Save {
             throw new RuntimeException(exception);
         }
     }
+
     public static void clientListToFile(ArrayList<Client> clientsList, String filePath) {
         try {
             FileOutputStream fileOut = new FileOutputStream(filePath);// "ProgramFiles/ClientsList.txt"

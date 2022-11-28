@@ -3,11 +3,11 @@ package models;
 import java.io.Serializable;
 
 public class Protocol implements Serializable {
-    private String clientName,project, deadLine,protocolDate;
+    private String clientName, project, deadLine, protocolDate;
     private int minutes;
 
 
-    public Protocol(String clientName, String project, String deadLine, int minutes, String protocolDate ) {
+    public Protocol(String clientName, String project, String deadLine, int minutes, String protocolDate) {
         this.clientName = clientName;
         this.project = project;
         this.deadLine = deadLine;

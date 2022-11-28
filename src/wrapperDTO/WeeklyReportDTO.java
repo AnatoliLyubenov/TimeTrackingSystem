@@ -1,7 +1,7 @@
 package wrapperDTO;
 
 public class WeeklyReportDTO {
-    private String accountName,clientName,project, deadLine,protocolDate;
+    private String accountName, clientName, project, deadLine, protocolDate;
     private int minutes;
 
     public WeeklyReportDTO(String accountName, String clientName, String project, String deadLine, int minutes, String protocolDate) {

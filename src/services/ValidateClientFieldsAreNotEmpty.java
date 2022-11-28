@@ -3,7 +3,7 @@ package services;
 import java.util.HashMap;
 
 public class ValidateClientFieldsAreNotEmpty {
-    public static boolean validateEnterClientFieldsAreNotEmpty(String clientName,String projectName,String expirationDate) {
+    public static boolean validateEnterClientFieldsAreNotEmpty(String clientName, String projectName, String expirationDate) {
         boolean isNotEmpty = true;
         HashMap<String, String> fields = new HashMap<>();
         fields.put(clientName, "\"Client's Name\"");

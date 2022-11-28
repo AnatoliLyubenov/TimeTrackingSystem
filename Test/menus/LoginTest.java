@@ -28,15 +28,16 @@ class LoginTest {
     }
 
     @Test
-    void getAdminAccountNameTakeUserInput(){
+    void getAdminAccountNameTakeUserInput() {
         String input = "admin";
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
 
         assertEquals("ADMIN", Login.getAdminAccountName());
     }
+
     @Test
-    void getAdminAccountPasswordTakeUserInput(){
+    void getAdminAccountPasswordTakeUserInput() {
         String input = "121332";
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
@@ -45,7 +46,7 @@ class LoginTest {
     }
 
     @Test
-    void initialLoginTrue(){
+    void initialLoginTrue() {
 
     }
 }
