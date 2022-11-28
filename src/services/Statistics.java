@@ -73,7 +73,7 @@ public class Statistics {
             totalWeekWorkTime += weekProtocols.get(i).getMinutes();
         }
         System.out.println("*******************************************************************************");
-        System.out.println("Week Number " + weekNumber + " - total work time spend on Clients.txt - > " + CalculateWorkTimeH.convertMtoH(totalWeekWorkTime));
+        System.out.println("Week Number " + weekNumber + " - total work time spend on Clients - > " + CalculateWorkTimeH.convertMtoH(totalWeekWorkTime));
         System.out.println("*******************************************************************************");
         System.out.println();
         PressEnter.promptEnterKey();
