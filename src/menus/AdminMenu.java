@@ -27,7 +27,7 @@ public class AdminMenu {
     }
 
     private static void chooseAdminMenuOption() {
-        int choice = validateChoice(getUserChoice(), 4);
+        int choice = validateChoice(getUserChoice(), 3);
         if (choice == -1) {//choice value OUT of range
             chooseAdminMenuOption();
         } else {

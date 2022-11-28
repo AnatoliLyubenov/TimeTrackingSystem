@@ -20,7 +20,7 @@ public class Login {
     }
 
     private static void chooseMenuOptionInitialLogin() {
-        int choice = validateChoice(getUserChoiceAdmin(), 4);
+        int choice = validateChoice(getUserChoiceAdmin(), 1);
         if (choice == -1) {
             chooseMenuOptionInitialLogin();
         } else if (choice == 1) {
