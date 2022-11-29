@@ -36,7 +36,7 @@ public class PrintOut {
                 totalDailyWorkTime += employeeDailyProtocols.get(i).getMinutes();
             }
             System.out.println("*******************************************************************************");
-            System.out.println(date + " - " + accountsList.get(accountName).getName() + " work time spend on Clients.txt - > " + CalculateWorkTimeH.convertMtoH(totalDailyWorkTime));
+            System.out.println(date + " - " + accountsList.get(accountName).getName() + " work time spend on Clients - > " + CalculateWorkTimeH.convertMtoH(totalDailyWorkTime));
             System.out.println("*******************************************************************************");
             System.out.println();
             totalDailyWorkTime = 0;//reset work time for the next date

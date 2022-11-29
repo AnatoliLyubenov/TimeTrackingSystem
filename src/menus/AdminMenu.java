@@ -82,7 +82,6 @@ public class AdminMenu {
             System.out.println();
             AdminMenu.menu();
         } else enterClient();
-
     }
 
     private static void enterEmployee() {
@@ -104,7 +103,6 @@ public class AdminMenu {
         }
         AdminMenu.menu();
     }
-
 
     public static void menu() {
         chooseAdminMenuOption();
