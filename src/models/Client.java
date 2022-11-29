@@ -58,6 +58,10 @@ public class Client implements Serializable {
         }
     }
 
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
+
     public String getClientName() {
         return clientName;
     }

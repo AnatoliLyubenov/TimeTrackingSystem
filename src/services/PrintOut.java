@@ -28,9 +28,9 @@ public class PrintOut {
         for (String date : employeeProtocols.keySet()) {
             ArrayList<Protocol> employeeDailyProtocols = employeeProtocols.get(date);
             for (int i = 0; i < employeeDailyProtocols.size(); i++) {
-                System.out.println("Client Name - > " + employeeDailyProtocols.get(i).getClientName());
-                System.out.println("Project Name - > " + employeeDailyProtocols.get(i).getProject());
-                System.out.println("Expiration Date - > " + employeeDailyProtocols.get(i).getDeadLine());
+                System.out.println("Client Name - > " + employeeDailyProtocols.get(i).getClient().getClientName());
+                System.out.println("Project Name - > " + employeeDailyProtocols.get(i).getClient().getProjectName());
+                System.out.println("Expiration Date - > " + employeeDailyProtocols.get(i).getClient().getExpirationDate());
                 System.out.println("Work time spend on " + date + " - > " + CalculateWorkTimeH.convertMtoH(employeeDailyProtocols.get(i).getMinutes()));
                 System.out.println("================================================================");
                 totalDailyWorkTime += employeeDailyProtocols.get(i).getMinutes();

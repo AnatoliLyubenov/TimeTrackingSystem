@@ -5,8 +5,6 @@ import models.Client;
 import models.Protocol;
 import services.*;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -87,14 +85,14 @@ public class EmployeeMenu {
 
         for (int i = 0; i < employeeDailyProtocols.size(); i++) {
             System.out.println("ID - > " + (i + 1));
-            System.out.println("Client Name - > " + employeeDailyProtocols.get(i).getClientName());
-            System.out.println("Project Name - > " + employeeDailyProtocols.get(i).getProject());
-            System.out.println("Expiration Date - > " + employeeDailyProtocols.get(i).getDeadLine());
+            System.out.println("Client Name - > " + employeeDailyProtocols.get(i).getClient().getClientName());
+            System.out.println("Project Name - > " + employeeDailyProtocols.get(i).getClient().getProjectName());
+            System.out.println("Expiration Date - > " + employeeDailyProtocols.get(i).getClient().getExpirationDate());
             System.out.println("Work time spend on " + protocolDate + " - > " + CalculateWorkTimeH.convertMtoH(employeeDailyProtocols.get(i).getMinutes()));
             System.out.println("================================================================");
             totalDailyWorkTime += employeeDailyProtocols.get(i).getMinutes();
         }
-        System.out.println(protocolDate + " - " + accountsList.get(accountName).getName() + " work time spend on Clients.txt - > " + CalculateWorkTimeH.convertMtoH(totalDailyWorkTime));
+        System.out.println(protocolDate + " - " + accountsList.get(accountName).getName() + " work time spend on Clients - > " + CalculateWorkTimeH.convertMtoH(totalDailyWorkTime));
     }
 
     private static void writeToDailyProtocol(String accountName) {
@@ -105,8 +103,8 @@ public class EmployeeMenu {
         int clientIndex = getChosenClientIndex();
         ArrayList<Client> clientsList = Load.clientListFromFile();
 
-        int durationMinutes=validateDuration(accountName,clientsList, clientIndex);
-        if (durationMinutes>0){
+        int durationMinutes = validateDuration(accountName, clientsList, clientIndex);
+        if (durationMinutes > 0) {
             addClientToDailyProtocol(accountName, clientIndex, durationMinutes, protocolDate);
         }
     }
@@ -118,7 +116,7 @@ public class EmployeeMenu {
 
         if (employeeDailyProtocols.size() == 0) {//if there aren't any daily Protocols
             employeeDailyProtocols.put(protocolDate, new ArrayList<>());
-            employeeDailyProtocols.get(protocolDate).add(new Protocol(clientsList.get(clientIndex).getClientName(), clientsList.get(clientIndex).getProjectName(), clientsList.get(clientIndex).getExpirationDate(), durationMinutes, protocolDate));
+            employeeDailyProtocols.get(protocolDate).add(new Protocol(clientsList.get(clientIndex), durationMinutes, protocolDate));
 
             System.out.println("List of Daily Protocols successfully created for " + accountsList.get(accountName).getName() + ".");
             System.out.println("The 1st Record successfully added to the Daily Protocol.");
@@ -126,7 +124,8 @@ public class EmployeeMenu {
             if (checkIfDailyProtocolExists(protocolDate, employeeDailyProtocols)) {
                 addMinutesToAlreadyExistingDailyProtocolRecord(accountsList, employeeDailyProtocols, clientsList, clientIndex, accountName, protocolDate, durationMinutes);
             } else {//if we create NEW Daily Protocol
-                employeeDailyProtocols.get(protocolDate).add(new Protocol(clientsList.get(clientIndex).getClientName(), clientsList.get(clientIndex).getProjectName(), clientsList.get(clientIndex).getExpirationDate(), durationMinutes, protocolDate));
+                employeeDailyProtocols.put(protocolDate, new ArrayList<>());
+                employeeDailyProtocols.get(protocolDate).add(new Protocol(clientsList.get(clientIndex), durationMinutes, protocolDate));
                 System.out.println("Record successfully added to the New Daily Protocol.");
             }
         }
@@ -142,7 +141,7 @@ public class EmployeeMenu {
             todayProtocols.get(protocolRecordIndex).setMinutes(todayProtocols.get(protocolRecordIndex).getMinutes() + durationMinutes);
             System.out.println("Record of Daily Protocol successfully edited.");
         } else {
-            employeeDailyProtocols.get(protocolDate).add(new Protocol(clientsList.get(clientIndex).getClientName(), clientsList.get(clientIndex).getProjectName(), clientsList.get(clientIndex).getExpirationDate(), durationMinutes, protocolDate));
+            employeeDailyProtocols.get(protocolDate).add(new Protocol(clientsList.get(clientIndex), durationMinutes, protocolDate));
             System.out.println("Record successfully added to the Daily Protocol.");
         }
     }

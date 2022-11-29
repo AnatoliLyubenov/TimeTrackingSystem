@@ -10,7 +10,7 @@ public class ValidateProtocol {
     public static int checkIfProjectRecordExists(ArrayList<Client> clientsList, ArrayList<Protocol> todayProtocols, int clientIndex) {
         int exists = -1;//if it doesn't exist
         for (int i = 0; i < todayProtocols.size(); i++) {
-            if (todayProtocols.get(i).getProject().equals(clientsList.get(clientIndex).getProjectName())) {//if DailyProtocol list contains Client with the same project name
+            if (todayProtocols.get(i).getClient().getProjectName().equals(clientsList.get(clientIndex).getProjectName())) {//if DailyProtocol list contains Client with the same project name
                 exists = i;//if exists return index of the protocol record
                 break;
             }

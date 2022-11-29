@@ -26,7 +26,7 @@ public class ValidateDurationChoice {
             Integer.parseInt(choice);
             ifDigit = true;
         } catch (NumberFormatException e) {
-            System.out.println("Invalid choice! Enter digit from 1 minute to 720 minutes(12 hours) including!");
+            System.out.println("Invalid choice! Enter digit from 1 to 720 (12 hours)!");
         }
         return ifDigit;
     }
@@ -60,27 +60,33 @@ public class ValidateDurationChoice {
     }
 
     public static int validateDuration(String accountName, ArrayList<Client> clientsList, int clientIndex) {
+        HashMap<String, Account> accountsList = Load.accountsListFromFile();
+        LocalDate today = LocalDate.now();
+        String date = today.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         int result = -1;
         System.out.println("Enter the amount of time spend today working on " + clientsList.get(clientIndex).getClientName() + "'s project - \"" + clientsList.get(clientIndex).getProjectName() + "\"");
         System.out.print("Duration in minutes - > ");
         Scanner sc = new Scanner(System.in);
         int choice = validateChoice(sc.nextLine());
-
+        //ArrayList<Protocol> employeeDailyProtocols=accountsList.get(accountName).getDailyProtocols().get(date);
         if (choice == -1) {
             result = validateDuration(accountName, clientsList, clientIndex);
 
         } else {
-            int totalWorkTimeForToday=getTotalWorkTimeForToday(accountName);
-            int remainingDailyWorkTime=getRemainingDailyWorkTime(totalWorkTimeForToday);
-            if (totalWorkTimeForToday > 720) {
-                LocalDate today = LocalDate.now();
-                String date = today.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-                System.out.println("You exceeded the amount of time allowed(12 hours/day) to spend on projects for " + date + " with " + CalculateWorkTimeH.convertMtoH(Math.abs(remainingDailyWorkTime)));
-                System.out.println("You won't be paid for working more then 12 hours daily!!!\nGet some rest!!!");
-                PressEnter.promptEnterKey();
-                result = remainingDailyWorkTime; //negative digit
-            } else {
-                System.out.println("You are allowed to work" + CalculateWorkTimeH.convertMtoH(remainingDailyWorkTime) + " more and get paid for them.");
+
+            if (accountsList.get(accountName).getDailyProtocols().get(date) != null) {
+                int totalWorkTimeForToday = getTotalWorkTimeForToday(accountName);
+                int remainingDailyWorkTime = getRemainingDailyWorkTime(totalWorkTimeForToday);
+                if (totalWorkTimeForToday > 720) {
+                    System.out.println("You exceeded the amount of time allowed(12 hours/day) to spend on projects for " + date + " with " + CalculateWorkTimeH.convertMtoH(Math.abs(remainingDailyWorkTime)));
+                    System.out.println("You won't be paid for working more then 12 hours daily!!!\nGet some rest!!!");
+                    PressEnter.promptEnterKey();
+                    result = remainingDailyWorkTime; //negative digit
+                }else {
+                    System.out.println("You still have " + CalculateWorkTimeH.convertMtoH(remainingDailyWorkTime)+" You can get more money if you work them off.");
+                    result = choice;
+                }
+            }else {
                 result = choice;
             }
         }
