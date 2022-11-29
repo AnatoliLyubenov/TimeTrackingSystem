@@ -18,6 +18,9 @@ import static services.ValidateProtocol.checkIfDailyProtocolExists;
 import static services.ValidateProtocol.checkIfProjectRecordExists;
 
 public class EmployeeMenu {
+    private static HashMap<String, Account> accountsList = Load.accountsListFromFile();
+    private static ArrayList<Client> clientsList = Load.clientListFromFile();
+
     public static String getUserChoice(String accountName) {
         System.out.println();
         System.out.println("  ===== A & A =====   ");
@@ -55,7 +58,6 @@ public class EmployeeMenu {
     }
 
     private static void showEmployeeDailyProtocols(String accountName) {
-        HashMap<String, Account> accountsList = Load.accountsListFromFile();
         LocalDate date = LocalDate.now();
         String today = date.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         System.out.println();
@@ -79,7 +81,6 @@ public class EmployeeMenu {
     }
 
     private static void showEmployeeTodayClients(String accountName, String protocolDate) {
-        HashMap<String, Account> accountsList = Load.accountsListFromFile();
         ArrayList<Protocol> employeeDailyProtocols = accountsList.get(accountName).getDailyProtocols().get(protocolDate);
         int totalDailyWorkTime = 0;
 
@@ -101,7 +102,6 @@ public class EmployeeMenu {
         String protocolDate = today.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         System.out.println();
         int clientIndex = getChosenClientIndex();
-        ArrayList<Client> clientsList = Load.clientListFromFile();
 
         int durationMinutes = validateDuration(accountName, clientsList, clientIndex);
         if (durationMinutes > 0) {
@@ -110,8 +110,6 @@ public class EmployeeMenu {
     }
 
     private static void addClientToDailyProtocol(String accountName, int clientIndex, int durationMinutes, String protocolDate) {
-        ArrayList<Client> clientsList = Load.clientListFromFile();
-        HashMap<String, Account> accountsList = Load.accountsListFromFile();
         HashMap<String, ArrayList<Protocol>> employeeDailyProtocols = accountsList.get(accountName).getDailyProtocols();
 
         if (employeeDailyProtocols.size() == 0) {//if there aren't any daily Protocols
@@ -126,6 +124,7 @@ public class EmployeeMenu {
             } else {//if we create NEW Daily Protocol
                 employeeDailyProtocols.put(protocolDate, new ArrayList<>());
                 employeeDailyProtocols.get(protocolDate).add(new Protocol(clientsList.get(clientIndex), durationMinutes, protocolDate));
+
                 System.out.println("Record successfully added to the New Daily Protocol.");
             }
         }

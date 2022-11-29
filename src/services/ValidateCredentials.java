@@ -6,8 +6,9 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class ValidateCredentials {
+    private static HashMap<String, Account> accountsList = Load.accountsListFromFile();
     public static boolean ifAccountNameIsValid(String inputName) {
-        HashMap<String, Account> accountsList = Load.accountsListFromFile();
+
         boolean isValid = false;
 
         String accountName = inputName.toUpperCase();
@@ -18,7 +19,7 @@ public class ValidateCredentials {
     }
 
     public static int checkPassword(String inputName, String password) {
-        HashMap<String, Account> accountsList = Load.accountsListFromFile();
+
         int result = 0;
         String accountName = inputName.toUpperCase();
 

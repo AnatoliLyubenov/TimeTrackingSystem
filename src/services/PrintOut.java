@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class PrintOut {
+    private static HashMap<String, Account> accountsList = Load.accountsListFromFile();
+
     public static void showEmployeesList(HashMap<String, Account> accountsList) {
         System.out.println();
         System.out.println("Employee list:");
@@ -21,7 +23,7 @@ public class PrintOut {
     }
 
     public static void showEmployeeClients(String accountName) {
-        HashMap<String, Account> accountsList = Load.accountsListFromFile();
+
         HashMap<String, ArrayList<Protocol>> employeeProtocols = accountsList.get(accountName).getDailyProtocols();
         int totalDailyWorkTime = 0;
 

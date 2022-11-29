@@ -13,6 +13,7 @@ import static services.PrintOut.showEmployeeClients;
 import static services.PrintOut.showEmployeesList;
 
 public class Statistics {
+    private static HashMap<String, Account> accountsList = Load.accountsListFromFile();
 
     public static String getEmployeeName() {
         System.out.println("Choose Employee Account Name to show Employee's Statistics");
@@ -22,7 +23,6 @@ public class Statistics {
     }
 
     public static void searchByEmployeeName() {
-        HashMap<String, Account> accountsList = Load.accountsListFromFile();
         showEmployeesList(accountsList);
         String accountName = getEmployeeName();
         if (ValidateRepeatingEmployee.checkRepeatingEmployee(accountName)) {
@@ -65,13 +65,13 @@ public class Statistics {
         System.out.println("----------------------------------------------------------------");
         for (int i = 0; i < weekProtocols.size(); i++) {
             System.out.println("Employee Account Name - > " + weekProtocols.get(i).getAccountName());
-            System.out.println("Client Name - > " + weekProtocols.get(i).getClientName());
-            System.out.println("Project Name - > " + weekProtocols.get(i).getProject());
-            System.out.println("Expiration Date - > " + weekProtocols.get(i).getDeadLine());
-            System.out.println("Protocol Date - > " + weekProtocols.get(i).getProtocolDate());
-            System.out.println("Work time spend during week number " + weekNumber + " - > " + CalculateWorkTimeH.convertMtoH(weekProtocols.get(i).getMinutes()));
+            System.out.println("Client Name - > " + weekProtocols.get(i).getProtocol().getClient().getClientName());
+            System.out.println("Project Name - > " + weekProtocols.get(i).getProtocol().getClient().getProjectName());
+            System.out.println("Expiration Date - > " + weekProtocols.get(i).getProtocol().getClient().getExpirationDate());
+            System.out.println("Protocol Date - > " + weekProtocols.get(i).getProtocol().getProtocolDate());
+            System.out.println("Work time spend during week number " + weekNumber + " - > " + CalculateWorkTimeH.convertMtoH(weekProtocols.get(i).getProtocol().getMinutes()));
             System.out.println("================================================================");
-            totalWeekWorkTime += weekProtocols.get(i).getMinutes();
+            totalWeekWorkTime += weekProtocols.get(i).getProtocol().getMinutes();
         }
         System.out.println("*******************************************************************************");
         System.out.println("Week Number " + weekNumber + " - total work time spend on Clients - > " + CalculateWorkTimeH.convertMtoH(totalWeekWorkTime));
@@ -82,8 +82,8 @@ public class Statistics {
 
     private static ArrayList<WeeklyReportDTO> collectProtocolsFromSpecificWeek(Date monday, Date sunday) {
         ArrayList<WeeklyReportDTO> weekProtocols = new ArrayList<>();
-        HashMap<String, Account> accountsList = Load.accountsListFromFile();
         SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+
         for (String accountName : accountsList.keySet()) {
             if (!accountsList.get(accountName).isAdmin()) {//excluding admin account, who doesn't have dailyProtocols' field
                 for (String protocolDate : accountsList.get(accountName).getDailyProtocols().keySet()) {
@@ -91,9 +91,8 @@ public class Statistics {
                         Date date = sdf.parse(protocolDate); //parse the protocolDate to Date object
                         if (date.compareTo(monday) >= 0 && date.compareTo(sunday) <= 0) {//compare if date is equal or between monday and sunday of the specific weekNumber
                             ArrayList<Protocol> employeeDailyProtocols = (accountsList.get(accountName).getDailyProtocols().get(protocolDate));//getting Protocol's List of for the specific date
-                            for (Protocol employeeDailyProtocol : employeeDailyProtocols) {
-                                //copying every Protocol's field to weekProtocols List
-                                weekProtocols.add(new WeeklyReportDTO(accountName, employeeDailyProtocol.getClient().getClientName(), employeeDailyProtocol.getClient().getProjectName(), employeeDailyProtocol.getClient().getExpirationDate(), employeeDailyProtocol.getMinutes(), employeeDailyProtocol.getProtocolDate()));
+                            for (Protocol employeeDailyProtocol : employeeDailyProtocols) {//copying every Protocol's field to weekProtocols List
+                                weekProtocols.add(new WeeklyReportDTO(accountName, employeeDailyProtocol));
                             }
                         }
                     } catch (ParseException e) {
