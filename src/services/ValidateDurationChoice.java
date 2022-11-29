@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class ValidateDurationChoice {
+    private static HashMap<String, Account> accountsList = Load.accountsListFromFile();
     private static int ifDigitInRange(int choice) {
         int result = choice;
         if (choice < 1 || choice > 720) {//is OUT of range
@@ -47,7 +48,7 @@ public class ValidateDurationChoice {
 
     private static int getTotalWorkTimeForToday(String accountName) {
         int totalWorkTimeForToday = 0;
-        HashMap<String, Account> accountsList = Load.accountsListFromFile();
+
 
         LocalDate today = LocalDate.now();
         String date = today.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
@@ -60,20 +61,18 @@ public class ValidateDurationChoice {
     }
 
     public static int validateDuration(String accountName, ArrayList<Client> clientsList, int clientIndex) {
-        HashMap<String, Account> accountsList = Load.accountsListFromFile();
         LocalDate today = LocalDate.now();
         String date = today.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         int result = -1;
+
         System.out.println("Enter the amount of time spend today working on " + clientsList.get(clientIndex).getClientName() + "'s project - \"" + clientsList.get(clientIndex).getProjectName() + "\"");
         System.out.print("Duration in minutes - > ");
         Scanner sc = new Scanner(System.in);
         int choice = validateChoice(sc.nextLine());
-        //ArrayList<Protocol> employeeDailyProtocols=accountsList.get(accountName).getDailyProtocols().get(date);
+
         if (choice == -1) {
             result = validateDuration(accountName, clientsList, clientIndex);
-
         } else {
-
             if (accountsList.get(accountName).getDailyProtocols().get(date) != null) {
                 int totalWorkTimeForToday = getTotalWorkTimeForToday(accountName);
                 int remainingDailyWorkTime = getRemainingDailyWorkTime(totalWorkTimeForToday);

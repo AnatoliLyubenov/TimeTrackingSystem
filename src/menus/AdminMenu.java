@@ -2,7 +2,6 @@ package menus;
 
 import services.*;
 
-import java.util.HashMap;
 import java.util.Scanner;
 
 import static menus.StatisticsMenu.statisticsMenu;
