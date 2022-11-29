@@ -5,6 +5,8 @@ import models.Client;
 import models.Protocol;
 import services.*;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -12,6 +14,8 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 import static models.Client.getChosenClientIndex;
+import static services.ValidateChoice.validateChoice;
+import static services.ValidateDurationChoice.validateDuration;
 import static services.ValidateProtocol.checkIfDailyProtocolExists;
 import static services.ValidateProtocol.checkIfProjectRecordExists;
 
@@ -34,7 +38,7 @@ public class EmployeeMenu {
     public static void chooseEmployeeMenuOption(String name) {
         String accountName = name.toUpperCase();
 
-        int choice = ValidateChoice.validateChoice(getUserChoice(accountName), 2);
+        int choice = validateChoice(getUserChoice(accountName), 2);
         if (choice == -1) {
             chooseEmployeeMenuOption(accountName);
         } else {
@@ -100,12 +104,11 @@ public class EmployeeMenu {
         System.out.println();
         int clientIndex = getChosenClientIndex();
         ArrayList<Client> clientsList = Load.clientListFromFile();
-        System.out.println("Enter the amount of time spend today working on " + clientsList.get(clientIndex).getClientName() + "'s project - \"" + clientsList.get(clientIndex).getProjectName() + "\"");
-        System.out.print("Duration in minutes - > ");
-        Scanner sc = new Scanner(System.in);
-        int duration = sc.nextInt();
 
-        addClientToDailyProtocol(accountName, clientIndex, duration, protocolDate);
+        int durationMinutes=validateDuration(accountName,clientsList, clientIndex);
+        if (durationMinutes>0){
+            addClientToDailyProtocol(accountName, clientIndex, durationMinutes, protocolDate);
+        }
     }
 
     private static void addClientToDailyProtocol(String accountName, int clientIndex, int durationMinutes, String protocolDate) {

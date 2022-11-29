@@ -23,15 +23,18 @@ public class Client implements Serializable {
     }
 
     public static int getChosenClientIndex() {
+        int result = 0;
         ArrayList<Client> clientsList = Load.clientListFromFile();
         showClients();
         System.out.print("Choose ID number of a Client - > ");
         Scanner sc = new Scanner(System.in);
         int choice = validateChoice(sc.nextLine(), clientsList.size());
         if (choice == -1) {
-            getChosenClientIndex();
+            result=getChosenClientIndex();
+        }else {
+            result=choice;
         }
-        return choice - 1;
+        return result - 1;
     }
 
     private static void showClients() {
