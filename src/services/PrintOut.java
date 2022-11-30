@@ -5,6 +5,9 @@ import models.Protocol;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.TreeMap;
+
+import static services.SortMapByKey.getSortedTreeMap;
 
 public class PrintOut {
     private static HashMap<String, Account> accountsList = Load.accountsListFromFile();
@@ -26,8 +29,9 @@ public class PrintOut {
 
         HashMap<String, ArrayList<Protocol>> employeeProtocols = accountsList.get(accountName).getDailyProtocols();
         int totalDailyWorkTime = 0;
+        TreeMap<String, ArrayList<Protocol>> employeeProtocolsTreeMap=getSortedTreeMap(employeeProtocols);
 
-        for (String date : employeeProtocols.keySet()) {
+        for (String date : employeeProtocolsTreeMap.keySet()) {
             ArrayList<Protocol> employeeDailyProtocols = employeeProtocols.get(date);
             for (int i = 0; i < employeeDailyProtocols.size(); i++) {
                 System.out.println("Client Name - > " + employeeDailyProtocols.get(i).getClient().getClientName());
